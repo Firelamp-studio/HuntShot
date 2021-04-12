@@ -1,7 +1,11 @@
-# This .gitignore file should be placed at the root of your Unity project directory
-#
-# Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
-#
+## Jetbrain Rider Cache ##
+
+.idea/
+Assets/Plugins/Editor/JetBrains*
+
+
+## UNITY ##
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -58,7 +62,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-# FMOD
+
+## FMOD ##
 /Assets/FMODStudioCache.asset
 /Assets/FMODStudioCache.asset.meta
 fmod.log
