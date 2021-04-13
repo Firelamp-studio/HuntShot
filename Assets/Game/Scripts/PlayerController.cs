@@ -3,12 +3,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float fireRate;
+    
+    [SerializeField] private GameObject weapon;
+    
+    public bool IsRotating => _isRotating;
+    public bool IsMoving => _characterController.velocity != Vector3.zero;
+
     private CharacterController _characterController;
     private PlayerInput _playerInput;
     private InputActionManager _inputActionManager;
     private Vector2 _moveDir;
     private float _rotationValue;
     private bool _lockedMovement;
+    private bool _isRotating;
 
     // Start is called before the first frame update
     void Start()
@@ -45,14 +53,25 @@ public class PlayerController : MonoBehaviour
             return;
 
         if (_moveDir != Vector2.zero)
-            _characterController.Move((transform.right * _moveDir.x + transform.forward * _moveDir.y) * Time.deltaTime);
-        
+            _characterController.SimpleMove((transform.right * _moveDir.x + transform.forward * _moveDir.y));
+
         if (_rotationValue != 0)
+        {
+            _isRotating = true;
             transform.Rotate(0, _rotationValue * 90 * Time.deltaTime, 0);
+        }
+        else
+        {
+            _isRotating = false;
+        }
     }
 
     void OnFire()
     {
+        Instantiate(weapon, transform.position, Quaternion.identity)
+            .GetComponent<Rigidbody>().velocity = transform.forward * fireRate + _characterController.velocity;
+
+        Debug.Log("Fire");
     }
 
     private void OnDestroy()
