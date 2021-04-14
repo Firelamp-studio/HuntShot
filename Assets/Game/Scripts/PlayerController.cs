@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
         _inputActionManager = new InputActionManager(_playerInput);
 
+        weapon.Weapon = new Weapon(1, 1, 1, 1, 1, 0);
 
         Camera playerCamera = Instantiate(_playerInput.camera);
         playerCamera.GetComponent<SingleplayerCameraController>().player = gameObject;
@@ -84,6 +85,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        var pickableScript = other.gameObject.GetComponent<PickableScript>();
+        if (pickableScript == null)
+            return;
+
+        var weapon = (Weapon) pickableScript.Item;
+        if (weapon != null)
+        {
+            this.weapon.Weapon = weapon;
+        }
     }
 
     private void OnDestroy()
