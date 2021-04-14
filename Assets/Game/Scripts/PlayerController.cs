@@ -6,9 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private WeaponScript weapon;
 
-    
+
     public bool IsRotating => _isRotating;
     public bool IsMoving => _characterController.velocity != Vector3.zero;
+    public Vector3 Velocity => _characterController.velocity;
 
     private CharacterController _characterController;
     private PlayerInput _playerInput;
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         if (_moveDir != Vector2.zero)
-            _characterController.SimpleMove((transform.right * _moveDir.x + transform.forward * _moveDir.y));
+            _characterController.SimpleMove(transform.right * _moveDir.x + transform.forward * _moveDir.y);
 
         if (_rotationValue != 0)
         {
@@ -83,7 +84,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        
     }
 
     private void OnDestroy()
