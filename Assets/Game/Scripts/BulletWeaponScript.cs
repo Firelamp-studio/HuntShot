@@ -25,8 +25,8 @@ public class BulletWeaponScript : WeaponScript
             {
                 var bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
                 bulletInstance.GetComponent<Rigidbody>().velocity =
-                    Quaternion.AngleAxis(currentSpacingDegree, Vector3.up) * transform.forward * FireRate +
-                    GetComponent<Rigidbody>().velocity;
+                    Quaternion.AngleAxis(currentSpacingDegree, Vector3.up) * transform.forward * BulletVelocity +
+                    playerController.Velocity;
                 bulletInstance.transform.rotation = transform.rotation;
 
                 bulletInstances.Add(bulletInstance);
@@ -44,8 +44,10 @@ public class BulletWeaponScript : WeaponScript
 
             var bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
             bulletInstance.GetComponent<Rigidbody>().velocity =
-                transform.forward * FireRate + GetComponent<Rigidbody>().velocity;
+                transform.forward * BulletVelocity + playerController.Velocity;
             bulletInstance.transform.rotation = transform.rotation;
+            
+            bulletInstances.Add(bulletInstance);
         }
 
 

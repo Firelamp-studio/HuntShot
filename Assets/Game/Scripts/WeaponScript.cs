@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public abstract class WeaponScript : MonoBehaviour
 {
     public PlayerController playerController;
-    public Weapon Weapon { get; private set; }// = maybe pistol
+    public Weapon Weapon { get; set; }// = maybe pistol
     
     public Buff<int> BulletNumberBuff { get; set; }
     public Buff<float> BulletVelocityBuff { get; set; }
