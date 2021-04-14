@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor;
 using UnityEngine;
 
 public class BulletWeaponScript : WeaponScript
 {
+    private float _elapsedFireRate = 0;
+    
     [SerializeField] private GameObject bullet;
 
     public override void OnShoot()
     {
-        if (Weapon is null) return;
+        if (Weapon is null || _elapsedFireRate > 0) return;
         
         var bulletInstances = new List<GameObject>();
-
+        
         if (SpreadDegree > 0)
         {
             if (BulletNumber == 1)
@@ -22,7 +25,7 @@ public class BulletWeaponScript : WeaponScript
             }
 
             var shotSpacingDegree = SpreadDegree / (BulletNumber - 1);
-            var currentSpacingDegree = shotSpacingDegree - SpreadDegree / 2;
+            var currentSpacingDegree = SpreadDegree / 2 * -1;
 
             for (var i = 0; BulletNumber > i; i++)
             {
@@ -60,5 +63,7 @@ public class BulletWeaponScript : WeaponScript
 
             Physics.IgnoreCollision(playerController.GetComponent<Collider>(), go.GetComponent<Collider>(), true);
         });
+
+        _elapsedFireRate = FireRate;
     }
 }

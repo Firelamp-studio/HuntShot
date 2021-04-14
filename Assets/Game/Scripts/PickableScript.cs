@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PickableScript : MonoBehaviour
 {
@@ -27,17 +25,17 @@ public class PickableScript : MonoBehaviour
     [SerializeField] private Texture itemTexture;
 
     //Test code
+    [SerializeField] private float BulletLifeTime;
     [SerializeField] private int BulletNumber;
     [SerializeField] private float BulletVelocity;
     [SerializeField] private float Damage;
     [SerializeField] private float FireRate;
-    [SerializeField] private float Range;
     [SerializeField] private int SpreadDegree;
 
     void Start()
     {
         mesh.material.SetTexture("_MainTex", itemTexture);
-        Item = new Weapon(itemName, itemTexture, BulletNumber, BulletVelocity, Damage, FireRate, Range, SpreadDegree);
+        Item = new Weapon(itemName, itemTexture, BulletLifeTime, BulletNumber, BulletVelocity, Damage, FireRate, SpreadDegree);
     }
 
     void Update()
