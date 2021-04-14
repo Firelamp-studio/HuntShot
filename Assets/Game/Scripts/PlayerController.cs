@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject weapon;
 
+    
     public bool IsRotating => _isRotating;
     public bool IsMoving => _characterController.velocity != Vector3.zero;
 
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        GameObject bulletInstance = Instantiate(weapon, transform.position, Quaternion.identity);
+        var bulletInstance = Instantiate(weapon, transform.position, Quaternion.identity);
         bulletInstance.GetComponent<Rigidbody>().velocity =
             transform.forward * fireRate + _characterController.velocity;
         bulletInstance.transform.rotation = transform.rotation;
