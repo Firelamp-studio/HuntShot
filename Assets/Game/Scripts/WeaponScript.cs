@@ -4,7 +4,7 @@ using System.Security.Permissions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Weapon : MonoBehaviour
+public class WeaponScript : MonoBehaviour
 {
     public PlayerController playerController;
     
@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour
         bulletInstance.GetComponent<Rigidbody>().velocity =
             transform.forward * fireRate + GetComponent<Rigidbody>().velocity;
         bulletInstance.transform.rotation = transform.rotation;
-        bulletInstance.GetComponent<Bullet>().owner = playerController;
+        bulletInstance.GetComponent<BulletScript>().owner = playerController;
         
         Physics.IgnoreCollision(GetComponent<Collider>(), bulletInstance.GetComponent<Collider>(), true);
     }

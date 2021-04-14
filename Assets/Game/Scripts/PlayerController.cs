@@ -1,11 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float fireRate;
-
-    [SerializeField] private GameObject weapon;
+    [SerializeField] private Weapon weapon;
 
     
     public bool IsRotating => _isRotating;
@@ -74,18 +73,17 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        var bulletInstance = Instantiate(weapon, transform.position, Quaternion.identity);
-        bulletInstance.GetComponent<Rigidbody>().velocity =
-            transform.forward * fireRate + _characterController.velocity;
-        bulletInstance.transform.rotation = transform.rotation;
-        bulletInstance.GetComponent<Bullet>().owner = this;
-        
-        Physics.IgnoreCollision(GetComponent<Collider>(), bulletInstance.GetComponent<Collider>(), true);
+        weapon.OnShoot();
     }
 
     public void OnDamage(Damage damage)
     {
         Debug.Log($"Damage: {damage.damage} | By: {damage.owner}");
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        
     }
 
     private void OnDestroy()
