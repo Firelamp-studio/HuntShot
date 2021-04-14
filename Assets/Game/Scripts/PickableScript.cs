@@ -13,6 +13,9 @@ public class PickableScript : MonoBehaviour
         set
         {
             mesh.enabled = value != null;
+            if(value != null)
+                mesh.material.SetTexture("_MainTex", value.Texture);
+            
             _item = value;
         }
     }
@@ -53,7 +56,7 @@ public class PickableScript : MonoBehaviour
         if(weapon == null)
             return;
 
-        Item = null;
+        Item = playerController.Weapon;
         playerController.Weapon = weapon;
     }
 }

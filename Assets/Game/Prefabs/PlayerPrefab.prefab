@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39a8267eee94cf40866feaef06fb93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponBehavior: {fileID: 0}
+  weaponBehavior: {fileID: 8909268111083160845}
 --- !u!114 &1724032212653729291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,3 +481,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4872352879434077628, guid: 067ec746cf1f62f43b839db699982459, type: 3}
   m_PrefabInstance: {fileID: 4536559175245681979}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8909268111083160845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4994787396598698038, guid: 067ec746cf1f62f43b839db699982459, type: 3}
+  m_PrefabInstance: {fileID: 4536559175245681979}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679c341ca2a04cf888d0912718916192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
