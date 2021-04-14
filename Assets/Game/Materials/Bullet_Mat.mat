@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Bullet_Mat
-  m_Shader: {fileID: -6465566751694194690, guid: 1ab0c4cb8be27a644816f2c54a97e29c, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: aba569d0b4653764d946680275b71c43, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e80763bac26311d47bec3b1442909cbf, type: 3}
+        m_Texture: {fileID: 2800000, guid: eff593ccade3c6140a5129539b1c615e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainText:

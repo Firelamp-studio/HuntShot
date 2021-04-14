@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 1.5
-  weapon: {fileID: 9038412236012877038, guid: 7a56ac157d6bc83438deaebc09ac7ab1, type: 3}
+  weapon: {fileID: 9038412236012877038, guid: 9bcf2bc7ef006fd46a0caab03c2e8256, type: 3}
 --- !u!114 &1724032212653729291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: f2f0635d97ddab64eaf44513d5d70eec, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: b0f14301b6bcb5a438b3c2079afbf559, type: 3}
   m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 9026496270292683569, guid: 9d0588a3f4a3b99428372cd33054efa4, type: 3}
+  m_Camera: {fileID: 9026496270292683569, guid: 9ce7048c04a785f4d88120b67e7c95a2, type: 3}
 --- !u!143 &1724032212653729289
 CharacterController:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 60a48ca02bf7faa4794117ad1d1a081a, type: 2}
+  - {fileID: 2100000, guid: 00d00fec2e6398f42811c546cb08798f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -241,7 +241,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ac0d2a6885c9dfa43b0191c7be4ad915, type: 2}
+  - {fileID: 2100000, guid: 0456fb9a18dad9f449d1fae302fc0fc7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,10 +272,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4963255242405361417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0406f71914d94a64fa6171b915abb7e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 613b527b460392143b3f423fcabc45c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handPosition: 0
+  handPosition: 1
   playerController: {fileID: 1724032212653729290}
 --- !u!1 &5692884761847310340
 GameObject:
@@ -338,7 +338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ac0d2a6885c9dfa43b0191c7be4ad915, type: 2}
+  - {fileID: 2100000, guid: 0456fb9a18dad9f449d1fae302fc0fc7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -369,8 +369,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5692884761847310340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0406f71914d94a64fa6171b915abb7e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 613b527b460392143b3f423fcabc45c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handPosition: 1
+  handPosition: 0
   playerController: {fileID: 1724032212653729290}

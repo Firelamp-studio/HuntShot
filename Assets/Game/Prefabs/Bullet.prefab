@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2213865074427465572}
   - component: {fileID: 2636373893987903740}
   m_Layer: 0
-  m_Name: RHandPlane
+  m_Name: BodyPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e3733600fbdc96341b94213378a7666e, type: 2}
+  - {fileID: 2100000, guid: 75403604c048d674fad26eefc1cbb180, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9038412236012877038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6a31f4c0791c2342b5ea6138aef9cb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2449770696fb8ea4a8a0b6cf030bd929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
