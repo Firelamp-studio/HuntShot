@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  bullet: {fileID: 0}
+  mesh: {fileID: 2287503892339418074}
+  bullet: {fileID: 9038412236012877038, guid: 9bcf2bc7ef006fd46a0caab03c2e8256, type: 3}
 --- !u!1 &4570153291987175244
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,8 +4,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private WeaponScript weapon;
+    [SerializeField] private WeaponScript weaponBehavior;
 
+    public Weapon Weapon
+    {
+        get => weaponBehavior.Weapon;
+        set => weaponBehavior.Weapon = value;
+    }
 
     public bool IsRotating => _isRotating;
     public bool IsMoving => _characterController.velocity != Vector3.zero;
@@ -73,25 +78,12 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        weapon.OnShoot();
+        weaponBehavior.OnShoot();
     }
 
     public void OnDamage(Damage damage)
     {
         Debug.Log($"Damage: {damage.damage} | By: {damage.owner}");
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        var pickableScript = other.gameObject.GetComponent<PickableScript>();
-        if (pickableScript == null)
-            return;
-
-        var weapon = (Weapon) pickableScript.Item;
-        if (weapon != null)
-        {
-            this.weapon.Weapon = weapon;
-        }
     }
 
     private void OnDestroy()

@@ -7,8 +7,29 @@ using UnityEngine.Serialization;
 public abstract class WeaponScript : MonoBehaviour
 {
     public PlayerController playerController;
-    public Weapon Weapon { get; set; }// = maybe pistol
-    
+    [SerializeField] private MeshRenderer mesh;
+
+    private Weapon _weapon;
+
+    public Weapon Weapon
+    {
+        get => _weapon;
+
+        set
+        {
+            if (value == null)
+            {
+                mesh.enabled = false;
+                mesh.material.mainTexture = null;
+                return;
+            }
+
+            _weapon = value;
+            mesh.enabled = true;
+            mesh.material.SetTexture("_MainTex", _weapon.Texture);
+        }
+    } // = maybe pistol
+
     public Buff<int> BulletNumberBuff { get; set; }
     public Buff<float> BulletVelocityBuff { get; set; }
     public Buff<float> DamageBuff { get; set; }
@@ -22,7 +43,7 @@ public abstract class WeaponScript : MonoBehaviour
     // public float FireRate => FireRateBuff.ApplyBuff(Weapon.FireRate);
     // public float Range => RangeBuff.ApplyBuff(Weapon.Range);
     // public int SpreadDegree => SpreadDegreeBuff.ApplyBuff(Weapon.SpreadDegree);
-    
+
     // test code
     public int BulletNumber => Weapon.BulletNumber;
     public float BulletVelocity => Weapon.BulletVelocity;
@@ -30,17 +51,16 @@ public abstract class WeaponScript : MonoBehaviour
     public float FireRate => Weapon.FireRate;
     public float Range => Weapon.Range;
     public int SpreadDegree => Weapon.SpreadDegree;
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        mesh.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public abstract void OnShoot();
