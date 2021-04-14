@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
         _inputActionManager = new InputActionManager(_playerInput);
 
-        weapon.Weapon = new Weapon(1, 1, 1, 1, 1, 0);
-
         Camera playerCamera = Instantiate(_playerInput.camera);
         playerCamera.GetComponent<SingleplayerCameraController>().player = gameObject;
 

@@ -1,4 +1,6 @@
-﻿public class Weapon : Item
+﻿using UnityEngine;
+
+public class Weapon : Item
 {
     public readonly int BulletNumber;
     public readonly float BulletVelocity;
@@ -7,7 +9,9 @@
     public readonly float Range;
     public readonly int SpreadDegree;
 
-    public Weapon(int bulletNumber, float bulletVelocity, float damage, float fireRate, float range, int spreadDegree)
+    public Weapon(string name, Texture texture,
+        int bulletNumber, float bulletVelocity, float damage, float fireRate, float range, int spreadDegree)
+        : base(name, texture)
     {
         BulletNumber = bulletNumber;
         BulletVelocity = bulletVelocity;
