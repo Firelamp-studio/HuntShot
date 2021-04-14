@@ -8,11 +8,19 @@ public class BulletScript : MonoBehaviour
     private Rigidbody _rigidbody;
     public PlayerController owner;
 
-    public float Damage => _damage;
     [SerializeField] private float _damage;
-
-    public float LifeTime => _lifeTime;
+    public float Damage
+    {
+        get => _damage;
+        set => _damage = value;
+    }
+    
     [SerializeField] private float _lifeTime;
+    public float LifeTime
+    {
+        get => _lifeTime;
+        set => _lifeTime = value;
+    }
 
     // Start is called before the first frame update
     void Start()

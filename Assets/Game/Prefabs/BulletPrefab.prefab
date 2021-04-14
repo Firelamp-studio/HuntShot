@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   _damage: 1
-  _lifeTime: 1
+  _lifeTime: 10
 --- !u!54 &9038412236012877042
 Rigidbody:
   m_ObjectHideFlags: 0

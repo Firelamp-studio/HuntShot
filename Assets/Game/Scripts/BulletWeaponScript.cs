@@ -1,17 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor;
+﻿using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 public class BulletWeaponScript : WeaponScript
 {
-    private float _elapsedFireRate = 0;
+    private bool _canShoot = true;
     
     [SerializeField] private GameObject bullet;
 
+    
+    
+    void Update()
+    {
+        
+    }
+    
     public override void OnShoot()
     {
-        if (Weapon is null || _elapsedFireRate > 0) return;
+        if (Weapon is null || !_canShoot) return;
         
         var bulletInstances = new List<GameObject>();
         
@@ -59,11 +66,24 @@ public class BulletWeaponScript : WeaponScript
 
         bulletInstances.ForEach(go =>
         {
-            go.GetComponent<BulletScript>().owner = playerController;
+            var bulletScript = go.GetComponent<BulletScript>();
+            
+            bulletScript.owner = playerController;
+            bulletScript.Damage = Damage;
+            bulletScript.LifeTime = BulletLifeTime;
 
             Physics.IgnoreCollision(playerController.GetComponent<Collider>(), go.GetComponent<Collider>(), true);
         });
 
-        _elapsedFireRate = FireRate;
+        _canShoot = false;
+
+        StartCoroutine(EnableShootingAfterDelay());
+    }
+
+    private IEnumerator EnableShootingAfterDelay()
+    {
+        yield return new WaitForSeconds(FireRate);
+
+        _canShoot = true;
     }
 }
