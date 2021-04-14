@@ -4,18 +4,32 @@ using System.Security.Permissions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class WeaponScript : MonoBehaviour
+public abstract class WeaponScript : MonoBehaviour
 {
     public PlayerController playerController;
+    public Weapon Weapon { get; private set; }// = maybe pistol
     
+    public Buff<int> BulletNumberBuff { get; set; }
+    public Buff<float> BulletVelocityBuff { get; set; }
+    public Buff<float> DamageBuff { get; set; }
     public Buff<float> FireRateBuff { get; set; }
     public Buff<float> RangeBuff { get; set; }
+    public Buff<int> SpreadDegreeBuff { get; set; }
+
+    // public int BulletNumber => BulletNumberBuff.ApplyBuff(Weapon.BulletNumber);
+    // public float BulletVelocity => BulletVelocityBuff.ApplyBuff(Weapon.BulletVelocity);
+    // public float Damage => DamageBuff.ApplyBuff(Weapon.Damage);
+    // public float FireRate => FireRateBuff.ApplyBuff(Weapon.FireRate);
+    // public float Range => RangeBuff.ApplyBuff(Weapon.Range);
+    // public int SpreadDegree => SpreadDegreeBuff.ApplyBuff(Weapon.SpreadDegree);
     
-    [SerializeField]
-    private float fireRate;
-    public float FireRate => FireRateBuff.ApplyBuff(fireRate);
-    
-    private 
+    // test code
+    public int BulletNumber => Weapon.BulletNumber;
+    public float BulletVelocity => Weapon.BulletVelocity;
+    public float Damage => Weapon.Damage;
+    public float FireRate => Weapon.FireRate;
+    public float Range => Weapon.Range;
+    public int SpreadDegree => Weapon.SpreadDegree;
     
     // Start is called before the first frame update
     void Start()
@@ -29,16 +43,5 @@ public class WeaponScript : MonoBehaviour
         
     }
 
-    public void OnShoot()
-    {
-        var bulletInstance = Instantiate(gameObject, transform);
-        bulletInstance.GetComponent<Rigidbody>().velocity =
-            transform.forward * fireRate + GetComponent<Rigidbody>().velocity;
-        bulletInstance.transform.rotation = transform.rotation;
-        bulletInstance.GetComponent<BulletScript>().owner = playerController;
-        
-        Physics.IgnoreCollision(GetComponent<Collider>(), bulletInstance.GetComponent<Collider>(), true);
-    }
-    
-    
+    public abstract void OnShoot();
 }
