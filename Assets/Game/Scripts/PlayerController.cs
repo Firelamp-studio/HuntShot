@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float fireRate;
-    
+
     [SerializeField] private GameObject weapon;
-    
+
     public bool IsRotating => _isRotating;
     public bool IsMoving => _characterController.velocity != Vector3.zero;
 
@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
         _inputActionManager = new InputActionManager(_playerInput);
+
+
+        Camera playerCamera = Instantiate(_playerInput.camera);
+        playerCamera.GetComponent<SingleplayerCameraController>().player = gameObject;
+
 
         _inputActionManager.RegisterActionEvent(
             "Move",
@@ -68,10 +73,18 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        Instantiate(weapon, transform.position, Quaternion.identity)
-            .GetComponent<Rigidbody>().velocity = transform.forward * fireRate + _characterController.velocity;
+        GameObject bulletInstance = Instantiate(weapon, transform.position, Quaternion.identity);
+        bulletInstance.GetComponent<Rigidbody>().velocity =
+            transform.forward * fireRate + _characterController.velocity;
+        bulletInstance.transform.rotation = transform.rotation;
+        bulletInstance.GetComponent<Bullet>().owner = this;
+        
+        Physics.IgnoreCollision(GetComponent<Collider>(), bulletInstance.GetComponent<Collider>(), true);
+    }
 
-        Debug.Log("Fire");
+    public void OnDamage(Damage damage)
+    {
+        Debug.Log($"Damage: {damage.damage} | By: {damage.owner}");
     }
 
     private void OnDestroy()
