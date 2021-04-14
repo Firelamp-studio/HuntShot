@@ -33,6 +33,9 @@ public class BulletScript : MonoBehaviour
         if (playerController != null)
             playerController.OnDamage(new Damage(_damage, owner));
 
+        if(other.GetComponent<BulletScript>() != null)
+            return;
+        
         Destroy(gameObject);
     }
 
