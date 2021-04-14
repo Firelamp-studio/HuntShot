@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class BulletWeaponScript : WeaponScript
@@ -7,6 +8,8 @@ public class BulletWeaponScript : WeaponScript
 
     public override void OnShoot()
     {
+        if (Weapon is null) return;
+        
         var bulletInstances = new List<GameObject>();
 
         if (SpreadDegree > 0)
