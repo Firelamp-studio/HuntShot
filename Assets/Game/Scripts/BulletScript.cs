@@ -39,9 +39,12 @@ public class BulletScript : MonoBehaviour
     {
         PlayerController playerController = other.GetComponent<PlayerController>();
         if (playerController != null)
+        {
             playerController.OnDamage(new Damage(_damage, owner));
+            Destroy(gameObject);
+        }
 
-        if(other.tag != "MapObject" || other.GetComponent<BulletScript>() != null)
+        if(!other.CompareTag("MapObject") || other.GetComponent<BulletScript>() != null)
             return;
         
         Destroy(gameObject);
