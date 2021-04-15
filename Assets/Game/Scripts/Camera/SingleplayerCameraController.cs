@@ -23,6 +23,12 @@ public class SingleplayerCameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        if(player == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
         _targetPosition = player.transform.position +
             player.transform.forward * _offsetPosition.z +
             player.transform.up * _offsetPosition.y +

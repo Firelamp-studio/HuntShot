@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 498217649}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: MapObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,6 +326,10 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: 8a850c7ec2399124eb35a41f0aa92097, type: 3}
     - target: {fileID: 7972264956519188389, guid: cda45cabad65bba45bc933e443f97f74, type: 3}
       propertyPath: BulletNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972264956519188389, guid: cda45cabad65bba45bc933e443f97f74, type: 3}
+      propertyPath: BulletLifeTime
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7972264956519188389, guid: cda45cabad65bba45bc933e443f97f74, type: 3}
@@ -604,6 +608,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7972264956519188389, guid: cda45cabad65bba45bc933e443f97f74, type: 3}
+      propertyPath: BulletLifeTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972264956519188389, guid: cda45cabad65bba45bc933e443f97f74, type: 3}
       propertyPath: BulletVelocity
       value: 2
       objectReference: {fileID: 0}
@@ -667,7 +675,7 @@ GameObject:
   - component: {fileID: 2054779658}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: MapObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

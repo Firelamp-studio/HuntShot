@@ -16,6 +16,23 @@ public class PlayerController : MonoBehaviour
     public bool IsMoving => _characterController.velocity != Vector3.zero;
     public Vector3 Velocity => _characterController.velocity;
 
+    private float _health;
+
+    public float Heath
+    {
+        get => _health;
+        set
+        {
+            if (value <= 0)
+            {
+                _health = 0;
+                OnDie();
+            }
+
+            _health = value;
+        }
+    }
+
     private CharacterController _characterController;
     private PlayerInput _playerInput;
     private InputActionManager _inputActionManager;
@@ -34,6 +51,7 @@ public class PlayerController : MonoBehaviour
         Camera playerCamera = Instantiate(_playerInput.camera);
         playerCamera.GetComponent<SingleplayerCameraController>().player = gameObject;
 
+        Heath = 10;
 
         _inputActionManager.RegisterActionEvent(
             "Move",
@@ -83,11 +101,21 @@ public class PlayerController : MonoBehaviour
 
     public void OnDamage(Damage damage)
     {
-        Debug.Log($"Damage: {damage.damage} | By: {damage.owner}");
+        Heath -= damage.damage;
+    }
+
+    public void OnDie()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
         _inputActionManager.DisposeAllEvents();
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(150 + (Screen.width / 2 * _playerInput.playerIndex), 100, 150, 100), "H: " + _health);
     }
 }
