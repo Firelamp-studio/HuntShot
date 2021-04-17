@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<weapons>
+    <bullet-weapon name="Pistol" bullet="DEFAULT" range="3" angle="0" reload="3" magazine="15" velocity="1.5" damage_mul="1" rate="3.5" shot_num="1"/>
+</weapons>
