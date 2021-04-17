@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class BulletBehavior : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     public PlayerController owner;
@@ -44,7 +44,7 @@ public class BulletScript : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if(!other.CompareTag("MapObject") || other.GetComponent<BulletScript>() != null)
+        if(!other.CompareTag("MapObject") || other.GetComponent<BulletBehavior>() != null)
             return;
         
         Destroy(gameObject);

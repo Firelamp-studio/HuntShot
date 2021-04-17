@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [ExecuteAlways]
-public class PickableScript : MonoBehaviour
+public class PickableBehavior : MonoBehaviour
 {
     private Item _item;
 

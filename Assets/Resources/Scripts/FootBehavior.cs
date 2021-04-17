@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FootScript : MonoBehaviour
+public class FootBehavior : MonoBehaviour
 {
     [SerializeField] private bool handPosition;
     [SerializeField] private PlayerController playerController;

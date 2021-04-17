@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class BulletWeaponScript : WeaponScript
+public class BulletWeaponBehavior : WeaponBehavior
 {
     private bool _canShoot = true;
     
@@ -66,7 +66,7 @@ public class BulletWeaponScript : WeaponScript
 
         bulletInstances.ForEach(go =>
         {
-            var bulletScript = go.GetComponent<BulletScript>();
+            var bulletScript = go.GetComponent<BulletBehavior>();
             
             bulletScript.owner = playerController;
             bulletScript.Damage = Damage;
