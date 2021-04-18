@@ -7,25 +7,29 @@ public class BulletBehavior : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     public PlayerController owner;
+    
+    [SerializeField] protected MeshRenderer bodyMesh;
+    [SerializeField] protected ParticleSystem contactParticlePrefab;
 
-    [SerializeField] private float _damage;
-    public float Damage
+    [SerializeField] private int damage;
+    public int Damage
     {
-        get => _damage;
-        set => _damage = value;
+        get => damage;
+        set => damage = value;
     }
     
-    [SerializeField] private float _lifeTime;
+    [SerializeField] private float lifeTime;
     public float LifeTime
     {
-        get => _lifeTime;
-        set => _lifeTime = value;
+        get => lifeTime;
+        set => lifeTime = value;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        bodyMesh.material.SetColor("_Color", owner.Color);
         StartCoroutine(DestroyAfterLifeTime());
     }
 
@@ -37,22 +41,26 @@ public class BulletBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if((!other.CompareTag("MapObject") && !other.CompareTag("Player")) || other.GetComponent<BulletBehavior>() != null)
+            return;
+
         PlayerController playerController = other.GetComponent<PlayerController>();
         if (playerController != null)
         {
-            playerController.OnDamage(new Damage(_damage, owner));
-            Destroy(gameObject);
+            playerController.OnDamage(new Damage(damage, owner));
         }
-
-        if(!other.CompareTag("MapObject") || other.GetComponent<BulletBehavior>() != null)
-            return;
+        
+        var contactParticle = Instantiate(contactParticlePrefab, transform.position, Quaternion.identity);
+        var particleMain = contactParticle.main;
+        particleMain.startColor = owner.Color;
+        contactParticle.Play();
         
         Destroy(gameObject);
     }
 
     IEnumerator DestroyAfterLifeTime()
     {
-        yield return new WaitForSeconds(_lifeTime);
+        yield return new WaitForSeconds(lifeTime);
 
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         _rigidbody.useGravity = true;

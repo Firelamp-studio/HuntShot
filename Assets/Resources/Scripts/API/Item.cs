@@ -1,11 +1,18 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public abstract class Item
 {
-    public readonly string Name;
-    public readonly Texture Texture;
+    public string Name;
+    public Texture2D Texture;
 
-    protected Item(string name, Texture texture)
+
+    public Item()
+    {
+    }
+
+    protected Item(string name, Texture2D texture)
     {
         Name = name;
         Texture = texture;

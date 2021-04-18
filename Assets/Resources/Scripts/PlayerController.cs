@@ -16,9 +16,11 @@ public class PlayerController : MonoBehaviour
     public bool IsMoving => _characterController.velocity != Vector3.zero;
     public Vector3 Velocity => _characterController.velocity;
 
-    private float _health;
+    public int LocalIndex => _playerInput.playerIndex;
 
-    public float Heath
+    private int _health;
+
+    public int Heath
     {
         get => _health;
         set
@@ -30,16 +32,24 @@ public class PlayerController : MonoBehaviour
             }
 
             _health = value;
+
+            _hudManager.RefreshHealthBar(_health);
         }
     }
+
+    public Color Color => _bodyManager.color;
 
     private CharacterController _characterController;
     private PlayerInput _playerInput;
     private InputActionManager _inputActionManager;
+    private SingleplayerCameraController _cameraController;
+    private HUDManager _hudManager;
     private Vector2 _moveDir;
     private float _rotationValue;
     private bool _lockedMovement;
     private bool _isRotating;
+    private SpawnManager _spawnManager;
+    private PlayerBodyManager _bodyManager;
 
     void Start()
     {
@@ -48,14 +58,22 @@ public class PlayerController : MonoBehaviour
         _inputActionManager = new InputActionManager(_playerInput);
 
         Camera playerCamera = Instantiate(_playerInput.camera);
-        playerCamera.GetComponent<SingleplayerCameraController>().player = gameObject;
+        _cameraController = playerCamera.GetComponent<SingleplayerCameraController>();
+        _cameraController.player = gameObject;
+
+        _hudManager = _cameraController.HUDManager;
 
         weaponBehavior
             .Mesh
             .GetComponent<Renderer>().material.SetTexture("_MainTex",
                 null);
+        weaponBehavior.hudManager = _cameraController.HUDManager;
         
-        Heath = 10;
+        _spawnManager = GameObject.Find("Spawn:" + LocalIndex).GetComponent<SpawnManager>();
+        _bodyManager = GetComponent<PlayerBodyManager>();
+        _bodyManager.color = _spawnManager.PlayerColor;
+        transform.position = _spawnManager.transform.position;
+        transform.rotation = _spawnManager.transform.rotation;
 
         _inputActionManager.RegisterActionEvent(
             "Move",
@@ -71,14 +89,32 @@ public class PlayerController : MonoBehaviour
 
         _inputActionManager.RegisterActionEvent(
             "Fire",
-            InputActionManager.EventType.PERFORMED,
-            ctx => OnFire()
+            InputActionManager.EventType.STARTED,
+            ctx => OnFireStart()
         );
 
+        _inputActionManager.RegisterActionEvent(
+            "Fire",
+            InputActionManager.EventType.CANCELED,
+            ctx => OnFireCancel()
+        );
+
+        _inputActionManager.RegisterActionEvent(
+            "Reload",
+            InputActionManager.EventType.PERFORMED,
+            ctx => OnReload()
+        );
+
+        Heath = 10;
         _lockedMovement = false;
     }
 
-    // Update is called once per frame
+    private void OnReload()
+    {
+        weaponBehavior.StartReload();
+    }
+
+
     void Update()
     {
         if (_lockedMovement)
@@ -98,9 +134,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnFire()
+    void OnFireStart()
     {
-        weaponBehavior.OnShoot();
+        weaponBehavior.OnShootStart();
+    }
+
+    void OnFireCancel()
+    {
+        weaponBehavior.OnShootCancel();
     }
 
     public void OnDamage(Damage damage)
@@ -110,16 +151,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnDie()
     {
+        _hudManager.SetGameOverScreen();
         Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
         _inputActionManager.DisposeAllEvents();
-    }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(150 + (Screen.width / 2 * _playerInput.playerIndex), 100, 150, 100), "H: " + _health);
     }
 }

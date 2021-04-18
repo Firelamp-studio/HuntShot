@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1724032212653729291}
   - component: {fileID: 1724032212653729289}
   - component: {fileID: 3439756763510590904}
+  - component: {fileID: 104632282156843355}
   m_Layer: 3
   m_Name: PlayerPrefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +116,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &104632282156843355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724032212653729334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0b7ad7fbd293d48a8e42bb3e3936df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyParts:
+    body: {fileID: 8103147378343859320}
+    leftFoot: {fileID: 1785206106498424134}
+    rightFoot: {fileID: 8882921691560844811}
 --- !u!1 &3972121479127485367
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +491,10 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1724032212653729290}
+    - target: {fileID: 4994787396598698038, guid: 067ec746cf1f62f43b839db699982459, type: 3}
+      propertyPath: contactParticlePrefab
+      value: 
+      objectReference: {fileID: 482035692201474898, guid: 82a340908af6f6e49b811136e3aedc32, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 067ec746cf1f62f43b839db699982459, type: 3}
 --- !u!4 &9037329900814188679 stripped

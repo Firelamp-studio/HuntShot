@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Mat
-  m_Shader: {fileID: -6465566751694194690, guid: aba569d0b4653764d946680275b71c43, type: 3}
+  m_Name: SparkParticle_Mat
+  m_Shader: {fileID: -6465566751694194690, guid: 8844f5054dba6164180d2801768e3794, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -33,7 +33,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - EmissionTex:
-        m_Texture: {fileID: 2800000, guid: 65db4ee5bd1fa1c4485ff50602060e23, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - SpriteTexture:
@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c5b85b1b9b0128c40a9c838a81841186, type: 3}
+        m_Texture: {fileID: 2800000, guid: eff593ccade3c6140a5129539b1c615e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainText:
@@ -102,7 +102,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - EmissionIntensity: 0.75
+    - EmissionIntensity: 0.25
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -132,7 +132,7 @@ Material:
     m_Colors:
     - EmissionTex: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

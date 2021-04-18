@@ -1,9 +1,9 @@
 ﻿public class Damage
 {
-    public readonly float damage;
+    public readonly int damage;
     public readonly PlayerController owner;
 
-    public Damage(float damage, PlayerController owner)
+    public Damage(int damage, PlayerController owner)
     {
         this.damage = damage;
         this.owner = owner;

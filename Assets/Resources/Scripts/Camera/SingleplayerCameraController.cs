@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SingleplayerCameraController : MonoBehaviour
 {
+    [SerializeField] private HUDManager hudManager;
+    public HUDManager HUDManager => hudManager;
+
     public GameObject player;
 
     private const float PositionSmoothTime = .1f;
@@ -23,16 +26,16 @@ public class SingleplayerCameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if(player == null)
+        if (player == null)
         {
             Destroy(gameObject);
             return;
         }
-        
+
         _targetPosition = player.transform.position +
-            player.transform.forward * _offsetPosition.z +
-            player.transform.up * _offsetPosition.y +
-            player.transform.right * _offsetPosition.x;
+                          player.transform.forward * _offsetPosition.z +
+                          player.transform.up * _offsetPosition.y +
+                          player.transform.right * _offsetPosition.x;
         if (_targetPosition != transform.position)
             transform.position = Vector3.SmoothDamp(transform.position, _targetPosition, ref _positionVelocity,
                 PositionSmoothTime);

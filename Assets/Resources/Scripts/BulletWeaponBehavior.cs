@@ -1,34 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public class BulletWeaponBehavior : WeaponBehavior
 {
     private bool _canShoot = true;
-    
+
     [SerializeField] private GameObject bullet;
 
-    
-    
-    void Update()
+
+    protected override void Update()
     {
-        
+        base.Update();
     }
-    
-    public override void OnShoot()
+
+    public override bool Shoot()
     {
-        if (Weapon is null || !_canShoot) return;
-        
+        if (Weapon is null || !_canShoot || BulletNumber == 0) return false;
+
         var bulletInstances = new List<GameObject>();
-        
+
         if (SpreadDegree > 0)
         {
             if (BulletNumber == 1)
             {
                 Debug.LogError(
                     $"Sviluppatore cane, mi stai sparando un proiettile mentre hai lo spread a {SpreadDegree} gradi");
-                return;
+                return false;
             }
 
             var shotSpacingDegree = SpreadDegree / (BulletNumber - 1);
@@ -52,14 +50,14 @@ public class BulletWeaponBehavior : WeaponBehavior
             {
                 Debug.LogError(
                     $"Sviluppatore cane, mi stai sparando {BulletNumber} proiettili insieme mentre hai lo spread 0");
-                return;
+                return false;
             }
 
             var bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
             bulletInstance.GetComponent<Rigidbody>().velocity =
                 transform.forward * BulletVelocity + playerController.Velocity;
             bulletInstance.transform.rotation = transform.rotation;
-            
+
             bulletInstances.Add(bulletInstance);
         }
 
@@ -67,7 +65,7 @@ public class BulletWeaponBehavior : WeaponBehavior
         bulletInstances.ForEach(go =>
         {
             var bulletScript = go.GetComponent<BulletBehavior>();
-            
+
             bulletScript.owner = playerController;
             bulletScript.Damage = Damage;
             bulletScript.LifeTime = BulletLifeTime;
@@ -76,8 +74,8 @@ public class BulletWeaponBehavior : WeaponBehavior
         });
 
         _canShoot = false;
-
         StartCoroutine(EnableShootingAfterDelay());
+        return true;
     }
 
     private IEnumerator EnableShootingAfterDelay()

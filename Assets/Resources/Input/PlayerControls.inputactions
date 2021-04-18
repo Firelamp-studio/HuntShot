@@ -28,6 +28,14 @@
                     "expectedControlType": "Axis",
                     "processors": "AxisDeadzone",
                     "interactions": ""
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "4538e9b1-03dc-4ac4-b6f0-c9c7b0be5772",
+                    "expectedControlType": "Button",
+                    "processors": "AxisDeadzone",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -61,6 +69,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "251215da-2198-405a-8de6-88ae7b704f4c",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

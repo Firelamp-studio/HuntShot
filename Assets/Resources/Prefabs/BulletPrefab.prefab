@@ -129,8 +129,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  _damage: 1
-  _lifeTime: 10
+  bodyMesh: {fileID: 2636373893987903740}
+  contactParticlePrefab: {fileID: 482035692201474898, guid: b5a69dd45daef9e4bbd5fc06d27a22a3, type: 3}
+  damage: 0
+  lifeTime: 0
 --- !u!54 &9038412236012877042
 Rigidbody:
   m_ObjectHideFlags: 0

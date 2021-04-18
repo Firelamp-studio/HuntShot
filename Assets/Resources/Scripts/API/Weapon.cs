@@ -1,23 +1,58 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+[Serializable]
 public class Weapon : Item
 {
-    public readonly float BulletLifeTime;
-    public readonly int BulletNumber;
-    public readonly float BulletVelocity;
-    public readonly float Damage;
-    public readonly float FireRate;
-    public readonly int SpreadDegree;
+    public float BulletLifeTime;
+    public int ShotsNumber;
+    public float BulletVelocity;
+    public int Damage;
+    public float ShotDelay;
+    public int SpreadDegree;
+    public int DefaultMagazine;
+    public int Reload;
+    public float ReloadTime;
+    public int Capacitor;
+    public int Magazine;
 
-    public Weapon(string name, Texture texture,
-        float bulletLifeTime, int bulletNumber, float bulletVelocity, float damage, float fireRate, int spreadDegree)
-        : base(name, texture)
+
+    public Weapon(Weapon weapon) : base(weapon.Name, weapon.Texture)
     {
-        BulletNumber = bulletNumber;
+        BulletLifeTime = weapon.BulletLifeTime;
+        ShotsNumber = weapon.ShotsNumber;
+        BulletVelocity = weapon.BulletVelocity;
+        Damage = weapon.Damage;
+        ShotDelay = weapon.ShotDelay;
+        SpreadDegree = weapon.SpreadDegree;
+        DefaultMagazine = weapon.DefaultMagazine;
+        Reload = weapon.Reload;
+        ReloadTime = weapon.ReloadTime;
+        
+        Magazine = DefaultMagazine;
+        Capacitor = 0;
+    }
+
+
+    public Weapon()
+    {
+        Magazine = DefaultMagazine;
+        Capacitor = 0;
+    }
+
+    public Weapon(string name, Texture2D texture, float bulletLifeTime, int shotsNumber, float bulletVelocity, int damage, float shotDelay, int spreadDegree, int defaultMagazine, int reload, float reloadTime) : base(name, texture)
+    {
+        BulletLifeTime = bulletLifeTime;
+        ShotsNumber = shotsNumber;
         BulletVelocity = bulletVelocity;
         Damage = damage;
-        FireRate = fireRate;
-        BulletLifeTime = bulletLifeTime;
+        ShotDelay = shotDelay;
         SpreadDegree = spreadDegree;
+        DefaultMagazine = defaultMagazine;
+        Reload = reload;
+        ReloadTime = reloadTime;
+        
+        Capacitor = 0;
+        Magazine = DefaultMagazine;
     }
 }
