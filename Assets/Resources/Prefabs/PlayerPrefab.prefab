@@ -52,6 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponBehavior: {fileID: 8909268111083160845}
+  footstepDelay: 0.35
+  damageSFX: event:/SFX/PlayerDamage
+  defeatSFX: event:/SFX/PlayerDefeat
+  stepSFX: event:/SFX/Footsteps/GrassFootsteps
 --- !u!114 &1724032212653729291
 MonoBehaviour:
   m_ObjectHideFlags: 0

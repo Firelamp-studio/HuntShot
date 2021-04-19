@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{78161d5a-2669-48a4-b6f7-54b9d331f646}">
+		<property name="assetPath">
+			<value>SFX/ie_shot_gun-luminalace.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.0897959183673471</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{206bc0af-0f76-455b-8b47-47ed730ee905}</destination>
+		</relationship>
+	</object>
+</objects>

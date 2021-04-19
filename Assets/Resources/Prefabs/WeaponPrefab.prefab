@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679c341ca2a04cf888d0912718916192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hudManager: {fileID: 0}
   playerController: {fileID: 0}
-  HudManager: {fileID: 0}
   reloadIcon: {fileID: 6547576609857295954}
   mesh: {fileID: 2287503892339418074}
+  weaponDestroyedSFX: event:/SFX/WeaponDestroyed
+  pickupSFX: event:/SFX/Pickup
   bullet: {fileID: 9038412236012877038, guid: 9bcf2bc7ef006fd46a0caab03c2e8256, type: 3}
 --- !u!1 &4570153291987175244
 GameObject:

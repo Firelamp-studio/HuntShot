@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{c6ebd251-7aff-4d78-913d-5eae0929ed14}">
+		<property name="assetPath">
+			<value>SFX/ReloadWeapon (1).wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>13.633125</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{206bc0af-0f76-455b-8b47-47ed730ee905}</destination>
+		</relationship>
+	</object>
+</objects>

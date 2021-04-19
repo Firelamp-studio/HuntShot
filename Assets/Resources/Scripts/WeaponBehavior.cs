@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Permissions;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Serialization;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public abstract class WeaponBehavior : MonoBehaviour
 {
@@ -13,6 +16,12 @@ public abstract class WeaponBehavior : MonoBehaviour
     public MeshRenderer Mesh => mesh;
     [SerializeField] private MeshRenderer mesh;
 
+    [SerializeField, Header("SFX"), EventRef]
+    private string weaponDestroyedSFX;
+
+    [SerializeField, EventRef] private string pickupSFX;
+    private EventInstance weaponReloadEI;
+
     private Weapon _weapon;
 
     public Weapon Weapon
@@ -22,6 +31,8 @@ public abstract class WeaponBehavior : MonoBehaviour
         set
         {
             StopReload();
+            weaponReloadEI.stop(STOP_MODE.IMMEDIATE);
+            weaponReloadEI.release();
 
             _weapon = value;
 
@@ -29,12 +40,16 @@ public abstract class WeaponBehavior : MonoBehaviour
             {
                 mesh.enabled = false;
                 mesh.material.SetTexture("_MainTex", null);
+                RuntimeManager.PlayOneShot(weaponDestroyedSFX, transform.position);
             }
             else
             {
                 mesh.enabled = true;
                 mesh.material.SetTexture("_MainTex", _weapon.Texture);
                 WeaponCapacitor = _weapon.Capacitor;
+                RuntimeManager.PlayOneShot(pickupSFX, transform.position);
+
+                weaponReloadEI = RuntimeManager.CreateInstance(_weapon.reloadSFX);
 
                 if (_weapon.Capacitor <= 0 && _weapon.Magazine > 0)
                     StartReload();
@@ -102,7 +117,10 @@ public abstract class WeaponBehavior : MonoBehaviour
         if (WeaponCapacitor > 0 && _currentReloadTime <= 0)
         {
             if (Shoot())
+            {
                 WeaponCapacitor -= 1;
+                RuntimeManager.PlayOneShot(Weapon.shotSFX, transform.position);
+            }
         }
         else if (_currentReloadTime <= 0)
             StartReload();
@@ -131,6 +149,9 @@ public abstract class WeaponBehavior : MonoBehaviour
             transform.localRotation = Quaternion.AngleAxis(45, Vector3.up);
             hudManager.RefreshWeaponBar(this);
             reloadIcon.EnableReloadIcon(() => CurrentReloadTime, ReloadTime);
+            
+            RuntimeManager.AttachInstanceToGameObject(weaponReloadEI, playerController.transform, playerController.GetComponent<Rigidbody>());
+            weaponReloadEI.start();
         }
     }
 

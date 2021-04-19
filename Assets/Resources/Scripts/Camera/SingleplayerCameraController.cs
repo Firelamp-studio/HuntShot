@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class SingleplayerCameraController : MonoBehaviour
 {
     [SerializeField] private HUDManager hudManager;
-    public HUDManager HUDManager => hudManager;
-
-    public GameObject player;
+    [SerializeField] private GameObject player;
 
     private const float PositionSmoothTime = .1f;
 
@@ -22,15 +21,17 @@ public class SingleplayerCameraController : MonoBehaviour
 
         _targetPosition = startPosition;
         _offsetPosition = startPosition;
+
+        // if (player.GetComponent<PlayerController>().LocalIndex != 0)
+        //     Destroy(GetComponent<StudioListener>());
+
+        GetComponent<StudioListener>().ListenerNumber = player.GetComponent<PlayerController>().LocalIndex;
     }
 
     void LateUpdate()
     {
         if (player == null)
-        {
-            Destroy(gameObject);
             return;
-        }
 
         _targetPosition = player.transform.position +
                           player.transform.forward * _offsetPosition.z +

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="EventFolder" id="{694133dd-f69c-4da2-8dba-df978eda01ca}">
+		<property name="name">
+			<value>Reloads</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5df040b6-dc60-4ad1-b5a9-95d5ff62b7bc}</destination>
+		</relationship>
+	</object>
+</objects>

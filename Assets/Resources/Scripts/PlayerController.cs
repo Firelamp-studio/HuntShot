@@ -1,10 +1,20 @@
 using System;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private WeaponBehavior weaponBehavior;
+    [SerializeField] private HUDManager hudManager;
+    [SerializeField] private float footstepDelay;
+
+    [SerializeField, Header("SFX"), EventRef]
+    private string damageSFX;
+
+    [SerializeField, EventRef] private string defeatSFX, stepSFX;
+
+    private float _footstepTimer;
 
     public Weapon Weapon
     {
@@ -15,10 +25,13 @@ public class PlayerController : MonoBehaviour
     public bool IsRotating => _isRotating;
     public bool IsMoving => _characterController.velocity != Vector3.zero;
     public Vector3 Velocity => _characterController.velocity;
+    public float RotationSpeed => Mathf.Abs(_rotationValue);
 
     public int LocalIndex => _playerInput.playerIndex;
 
     private int _health;
+
+    private GameObject _soundtrack;
 
     public int Heath
     {
@@ -33,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
             _health = value;
 
-            _hudManager.RefreshHealthBar(_health);
+            hudManager.RefreshHealthBar(_health);
         }
     }
 
@@ -43,7 +56,6 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _playerInput;
     private InputActionManager _inputActionManager;
     private SingleplayerCameraController _cameraController;
-    private HUDManager _hudManager;
     private Vector2 _moveDir;
     private float _rotationValue;
     private bool _lockedMovement;
@@ -53,22 +65,22 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        _footstepTimer = 0;
+
+        _soundtrack = GameObject.FindWithTag("Soundtrack");
+
         _characterController = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
         _inputActionManager = new InputActionManager(_playerInput);
 
-        Camera playerCamera = Instantiate(_playerInput.camera);
-        _cameraController = playerCamera.GetComponent<SingleplayerCameraController>();
-        _cameraController.player = gameObject;
-
-        _hudManager = _cameraController.HUDManager;
+        _cameraController = _playerInput.camera.GetComponent<SingleplayerCameraController>();
 
         weaponBehavior
             .Mesh
             .GetComponent<Renderer>().material.SetTexture("_MainTex",
                 null);
-        weaponBehavior.hudManager = _cameraController.HUDManager;
-        
+        weaponBehavior.hudManager = hudManager;
+
         _spawnManager = GameObject.Find("Spawn:" + LocalIndex).GetComponent<SpawnManager>();
         _bodyManager = GetComponent<PlayerBodyManager>();
         _bodyManager.color = _spawnManager.PlayerColor;
@@ -105,8 +117,48 @@ public class PlayerController : MonoBehaviour
             ctx => OnReload()
         );
 
+        _inputActionManager.RegisterActionEvent(
+            "SwitchMusic",
+            InputActionManager.EventType.PERFORMED,
+            ctx => OnSwitchMusic()
+        );
+
+        _inputActionManager.RegisterActionEvent(
+            "SwitchPlayerJoinActive",
+            InputActionManager.EventType.PERFORMED,
+            ctx => OnSwitchPlayerJoinActive()
+        );
+
         Heath = 10;
         _lockedMovement = false;
+    }
+
+    private void OnSwitchPlayerJoinActive()
+    {
+        var im = GameObject.FindWithTag("InputManager");
+        if (im == null)
+            return;
+
+        var inputManager = im.GetComponent<PlayerInputManager>();
+        if (inputManager == null)
+            return;
+
+        if (inputManager.joiningEnabled)
+        {
+            inputManager.DisableJoining();
+            RuntimeManager.PlayOneShot("event:/SFX/UI/DisablePlayerJoin");
+        }
+        else
+        {
+            inputManager.EnableJoining();
+            RuntimeManager.PlayOneShot("event:/SFX/UI/EnablePlayerJoin");
+        }
+    }
+
+    private void OnSwitchMusic()
+    {
+        if (_soundtrack != null)
+            _soundtrack.SetActive(!_soundtrack.activeSelf);
     }
 
     private void OnReload()
@@ -120,6 +172,7 @@ public class PlayerController : MonoBehaviour
         if (_lockedMovement)
             return;
 
+
         if (_moveDir != Vector2.zero)
             _characterController.SimpleMove(transform.right * _moveDir.x + transform.forward * _moveDir.y);
 
@@ -131,6 +184,24 @@ public class PlayerController : MonoBehaviour
         else
         {
             _isRotating = false;
+        }
+
+        if (IsMoving || IsRotating)
+        {
+            if (_footstepTimer > 0)
+            {
+                _footstepTimer -= Time.deltaTime;
+            }
+            else if (_footstepTimer <= 0)
+            {
+                var playerVelocity = Velocity.magnitude;
+                if (playerVelocity < RotationSpeed)
+                    playerVelocity = RotationSpeed;
+
+                _footstepTimer = 1.2f - playerVelocity;
+
+                RuntimeManager.PlayOneShot(stepSFX, transform.position);
+            }
         }
     }
 
@@ -147,12 +218,33 @@ public class PlayerController : MonoBehaviour
     public void OnDamage(Damage damage)
     {
         Heath -= damage.damage;
+        RuntimeManager.PlayOneShot(damageSFX, transform.position);
     }
 
     public void OnDie()
     {
-        _hudManager.SetGameOverScreen();
-        Destroy(gameObject);
+        RuntimeManager.PlayOneShot(defeatSFX, transform.position);
+
+        var players = GameObject.FindGameObjectsWithTag("Player");
+
+        if (players.Length <= 2)
+        {
+            foreach (var o in players)
+            {
+                var player = o.GetComponent<PlayerController>();
+                if (player == null || player.LocalIndex == LocalIndex)
+                    break;
+
+                player.OnWin();
+            }
+        }
+
+        Destroy(transform.parent.gameObject);
+    }
+
+    public void OnWin()
+    {
+        hudManager.SetWinScreen();
     }
 
     private void OnDestroy()

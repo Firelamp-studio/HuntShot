@@ -6,19 +6,20 @@ using UnityEngine;
 [Serializable]
 public struct HUDScreens
 {
-    public GameObject gameOverScreen;
+    public GameObject winScreen;
 }
 
 public class HUDManager : MonoBehaviour
 {
     [SerializeField] private HUDHeartsManager heartsManager;
     [SerializeField] private HUDWeaponManager weaponManager;
-    
+
     [SerializeField] private HUDScreens screens;
 
     // Start is called before the first frame update
     void Start()
     {
+        screens.winScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,8 +37,8 @@ public class HUDManager : MonoBehaviour
         weaponManager.RefreshWeaponBar(weapon);
     }
 
-    public void SetGameOverScreen()
+    public void SetWinScreen()
     {
-        screens.gameOverScreen.SetActive(true);
+        screens.winScreen.SetActive(true);
     }
 }

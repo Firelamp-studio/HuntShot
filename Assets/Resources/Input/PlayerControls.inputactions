@@ -14,6 +14,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "c48b1531-ece0-4236-a41f-34b0f8e2cdd5",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Fire",
                     "type": "Button",
                     "id": "67f78114-5306-472c-a186-fc301cb60040",
@@ -22,17 +30,25 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Rotate",
-                    "type": "Value",
-                    "id": "c48b1531-ece0-4236-a41f-34b0f8e2cdd5",
-                    "expectedControlType": "Axis",
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "4538e9b1-03dc-4ac4-b6f0-c9c7b0be5772",
+                    "expectedControlType": "Button",
                     "processors": "AxisDeadzone",
                     "interactions": ""
                 },
                 {
-                    "name": "Reload",
+                    "name": "SwitchMusic",
                     "type": "Button",
-                    "id": "4538e9b1-03dc-4ac4-b6f0-c9c7b0be5772",
+                    "id": "fa117d48-15e7-483c-8a7e-95b12abba8e0",
+                    "expectedControlType": "Button",
+                    "processors": "AxisDeadzone",
+                    "interactions": ""
+                },
+                {
+                    "name": "SwitchPlayerJoinActive",
+                    "type": "Button",
+                    "id": "a429ad98-2761-41e4-bdfe-327d013fd7e3",
                     "expectedControlType": "Button",
                     "processors": "AxisDeadzone",
                     "interactions": ""
@@ -44,20 +60,9 @@
                     "id": "ebc2ef91-91f7-409f-97d6-4ca9e618f1f4",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.3,max=0.975)",
                     "groups": "Gamepad",
                     "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f714ae70-fd0e-48bf-a794-ed254441e36f",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -66,7 +71,7 @@
                     "id": "0f1b60a7-aba8-4cd2-92aa-08cdca32ffb0",
                     "path": "<Gamepad>/rightStick/x",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone(min=0.3,max=0.975)",
                     "groups": "Gamepad",
                     "action": "Rotate",
                     "isComposite": false,
@@ -80,6 +85,39 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf30755f-3105-4ba1-9110-c410d21314fc",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchMusic",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f07817cc-a81c-4ece-b258-89d492cf6234",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchPlayerJoinActive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f714ae70-fd0e-48bf-a794-ed254441e36f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

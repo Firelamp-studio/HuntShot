@@ -25,13 +25,15 @@ public class HUDWeaponManager : MonoBehaviour
     {
         if (weaponText == null)
             return;
-        
+
         currentWeapon = weapon;
 
         if (weapon.Weapon != null)
-            weaponText.text = "<size=20>" + weapon.Weapon.Name + "</size> " + weapon.Weapon.Capacitor + "/" +
-                              weapon.Weapon.Magazine + " <size=15>[" + weapon.Reload + "]</size>";
+            weaponText.text = "<size=20>" + weapon.Weapon.Name + "</size> " +
+                              (weapon.BulletNumber > 1 ? "<size=15>(" + weapon.BulletNumber + ")</size>" : "") +
+                              weapon.Weapon.Capacitor + "/" + weapon.Weapon.Magazine +
+                              (weapon.Reload > 1 ? "<size=15>[" + weapon.Reload + "]</size>" : "");
         else
-            weaponText.text = "<size=20>Empty</size> 0/0 <size=15>[0]</size>";
+            weaponText.text = "<size=20>Empty</size>";
     }
 }

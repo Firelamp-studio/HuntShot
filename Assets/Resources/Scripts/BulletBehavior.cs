@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
@@ -12,6 +13,9 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] protected ParticleSystem contactParticlePrefab;
 
     [SerializeField] private int damage;
+    
+    [SerializeField, Header("SFX"), EventRef]
+    private string hitSFX;
     public int Damage
     {
         get => damage;
@@ -44,6 +48,8 @@ public class BulletBehavior : MonoBehaviour
         if((!other.CompareTag("MapObject") && !other.CompareTag("Player")) || other.GetComponent<BulletBehavior>() != null)
             return;
 
+        RuntimeManager.PlayOneShot(hitSFX, transform.position);
+        
         PlayerController playerController = other.GetComponent<PlayerController>();
         if (playerController != null)
         {
@@ -54,7 +60,7 @@ public class BulletBehavior : MonoBehaviour
         var particleMain = contactParticle.main;
         particleMain.startColor = owner.Color;
         contactParticle.Play();
-        
+
         Destroy(gameObject);
     }
 

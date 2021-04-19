@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class BulletWeaponBehavior : WeaponBehavior
@@ -7,7 +8,6 @@ public class BulletWeaponBehavior : WeaponBehavior
     private bool _canShoot = true;
 
     [SerializeField] private GameObject bullet;
-
 
     protected override void Update()
     {

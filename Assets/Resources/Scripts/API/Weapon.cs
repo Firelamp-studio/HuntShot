@@ -1,4 +1,5 @@
 ﻿using System;
+using FMODUnity;
 using UnityEngine;
 
 [Serializable]
@@ -15,6 +16,10 @@ public class Weapon : Item
     public float ReloadTime;
     public int Capacitor;
     public int Magazine;
+    
+    [Header("SFX"), EventRef]
+    public string shotSFX;
+    [EventRef] public string reloadSFX;
 
 
     public Weapon(Weapon weapon) : base(weapon.Name, weapon.Texture)
@@ -28,9 +33,12 @@ public class Weapon : Item
         DefaultMagazine = weapon.DefaultMagazine;
         Reload = weapon.Reload;
         ReloadTime = weapon.ReloadTime;
-        
+
         Magazine = DefaultMagazine;
         Capacitor = 0;
+
+        shotSFX = weapon.shotSFX;
+        reloadSFX = weapon.reloadSFX;
     }
 
 

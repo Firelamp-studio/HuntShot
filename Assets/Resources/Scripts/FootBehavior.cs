@@ -9,26 +9,30 @@ public class FootBehavior : MonoBehaviour
 
     private const float HandMovementOffset = 0.025f;
 
+    private float _footstepTimer;
+
     void Start()
     {
         if (!handPosition)
             transform.position += HandMovementOffset * transform.forward;
-
-        StartCoroutine(MoveHand());
     }
 
     void Update()
     {
-    }
-
-    IEnumerator MoveHand()
-    {
-        while (true)
+        if (playerController.IsMoving || playerController.IsRotating)
         {
-            yield return new WaitForSeconds(0.1f);
-
-            if (playerController.IsMoving || playerController.IsRotating)
+            if (_footstepTimer > 0)
             {
+                _footstepTimer -= Time.deltaTime;
+            }
+            else if (_footstepTimer <= 0)
+            {
+                var playerVelocity = playerController.Velocity.magnitude;
+                if (playerVelocity < playerController.RotationSpeed)
+                    playerVelocity = playerController.RotationSpeed;
+
+                _footstepTimer = 1.2f - playerVelocity;
+
                 transform.position += HandMovementOffset * (handPosition ? 1 : -1) * transform.forward;
                 handPosition = !handPosition;
             }
