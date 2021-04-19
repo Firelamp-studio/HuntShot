@@ -1,14 +1,3 @@
-## Jetbrain Rider Cache ##
-
-.idea/
-Assets/Plugins/Editor/JetBrains*
-
-## FMOD ##
-/Assets/FMODStudioCache.asset
-/Assets/FMODStudioCache.asset.meta
-fmod.log
-fmod_editor.log
-
 ## UNITY ##
 
 /[Ll]ibrary/
@@ -67,3 +56,15 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+
+## Jetbrain Rider Cache ##
+
+.idea/
+Assets/Plugins/Editor/JetBrains*
+
+## FMOD ##
+/Assets/FMODStudioCache.asset
+/Assets/FMODStudioCache.asset.meta
+fmod.log
+fmod_editor.log
